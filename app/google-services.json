@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "33783109767",
+    "firebase_url": "https://vitwale-e0508.firebaseio.com",
+    "project_id": "vitwale-e0508",
+    "storage_bucket": "vitwale-e0508.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33783109767:android:93c048274cf85fbe",
+        "android_client_info": {
+          "package_name": "com.vitwale.vitwale"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33783109767-8ma1sb56j2cb72uckemos7dsqmgs33vb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vitwale.vitwale",
+            "certificate_hash": "71ae7dfc34419b1c26627ba161e3dcc751a35344"
+          }
+        },
+        {
+          "client_id": "33783109767-vqjn3p6u1trihuub7pfn13rqa7hqnccf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL8FDKQRUAQaDJqguDQ67KxMItjULFzBs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33783109767-vqjn3p6u1trihuub7pfn13rqa7hqnccf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
