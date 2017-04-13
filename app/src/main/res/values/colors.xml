@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorWhite">#FFFFFF</color>
+
+    <!--For SignUpSignIn-->
+    <color name="colorPrimaryTrans">#a0292929</color>
+    <color name="colorAccentTrans">#b4152d39</color>
+    <color name="colorBlackTrans">#a0000000</color>
 </resources>

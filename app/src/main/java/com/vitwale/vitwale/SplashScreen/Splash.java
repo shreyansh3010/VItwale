@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+
 import com.vitwale.vitwale.MainActivity;
 import com.vitwale.vitwale.R;
 
@@ -36,7 +37,7 @@ public class Splash extends AppCompatActivity {
                         waited += 100;
                     }
                     Intent intent = new Intent(Splash.this,
-                            MainActivity.class);                            //NavigationDrawer
+                            MainActivity.class);                            //NavDrawer
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                     Splash.this.finish();

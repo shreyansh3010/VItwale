@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_organizations"
+            android:icon="@drawable/organizations"
+            android:title="Organizations" />
+
+        <item
+            android:id="@+id/nav_events"
+            android:icon="@drawable/events"
+            android:title="Events" />
+
+        <item
+            android:id="@+id/nav_recruitments"
+            android:icon="@drawable/recruitments"
+            android:title="Recruitments" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_about_us"
+                android:icon="@drawable/about"
+                android:title="About Us" />
+            <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@drawable/contact"
+                android:title="Contact Us" />
+        </menu>
+    </item>
+
+</menu>
