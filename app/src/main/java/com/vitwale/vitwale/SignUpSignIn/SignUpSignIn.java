@@ -20,8 +20,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.stephentuso.welcome.WelcomeHelper;
 import com.vitwale.vitwale.IntroSlider.MyWelcomeActivity;
 import com.vitwale.vitwale.MainActivity;
@@ -37,6 +40,7 @@ public class SignUpSignIn extends AppCompatActivity {
     private Button btnSignin;
     private WelcomeHelper welcomeScreen;
     private TextView memailSignup, mPasswordSignup, mMobileSignup;
+    private TextView memailSignin, mPasswordSignin, mMobileSignin;
     private FirebaseAuth mAuth;
     private ProgressDialog mProgressDialog;
     private DatabaseReference mDatabase;
@@ -62,7 +66,8 @@ public class SignUpSignIn extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCanceledOnTouchOutside(false);
 
-
+        memailSignin = (TextView) findViewById(R.id.email_sigin_field);
+        mPasswordSignin = (TextView) findViewById(R.id.password_signin_field);
         btnSignin= (Button) findViewById(R.id.btnSignin);
 
         llSignup = (LinearLayout) findViewById(R.id.llSignup);
@@ -90,6 +95,13 @@ public class SignUpSignIn extends AppCompatActivity {
                 Animation clockwise= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_right_to_left);
                 btnSignup.startAnimation(clockwise);
                 startRegister();
+            }
+        });
+
+        btnSignin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkLogin();
             }
         });
     }
@@ -177,6 +189,58 @@ public class SignUpSignIn extends AppCompatActivity {
         }
 
     }
+    private void checkLogin() {
 
+        String email = memailSignin.getText().toString().trim();
+        String password = mPasswordSignin.getText().toString().trim();
+
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+
+            mProgressDialog.setMessage("Checking Login...");
+            mProgressDialog.show();
+
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        checkUserExist();
+                    } else {
+                        mProgressDialog.dismiss();
+                        Toast.makeText(SignUpSignIn.this, "You don't have account", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            });
+
+        }
+    }
+    private void checkUserExist() {
+
+        if(mAuth.getCurrentUser() !=null) {
+            final String user_id = mAuth.getCurrentUser().getUid();
+            mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.hasChild(user_id)) {
+                        Intent mainintent = new Intent(SignUpSignIn.this, MainActivity.class);
+                        mainintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(mainintent);
+                    }
+                    else {
+                        /*Intent setupintent = new Intent(LoginActivity.this, SetupActivity.class);
+                        setupintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(setupintent);*/
+                        Toast.makeText(SignUpSignIn.this, "setup account", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            mProgressDialog.dismiss();
+        }
+    }
 
 }
