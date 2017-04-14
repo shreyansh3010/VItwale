@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:textColor="#fff"
         android:text="Got it!"
-        android:background="@color/colorAccent"
+        android:background="#FF4081"
         android:onClick="Click"
         android:layout_marginTop="20dp"
         android:layout_below="@id/text"

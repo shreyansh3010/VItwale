@@ -23,7 +23,9 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
             android:hint="Email"
+            android:id="@+id/email_signup_field"
             android:textColor="#FFFFFF" />
     </android.support.design.widget.TextInputLayout>
 
@@ -36,6 +38,8 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/password_signup_field"
+            android:inputType="textPassword"
             android:hint="Password"
             android:textColor="#FFFFFF" />
     </android.support.design.widget.TextInputLayout>
@@ -50,11 +54,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mobile Number"
+            android:id="@+id/mobile_signup_filed"
+            android:inputType="number"
             android:textColor="#FFFFFF" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/btnSignup"
+        android:id="@+id/SignupBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

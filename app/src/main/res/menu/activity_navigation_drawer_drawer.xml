@@ -4,22 +4,22 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/about"
             android:title="Home" />
 
         <item
             android:id="@+id/nav_organizations"
-            android:icon="@drawable/organizations"
+            android:icon="@drawable/about"
             android:title="Organizations" />
 
         <item
             android:id="@+id/nav_events"
-            android:icon="@drawable/events"
+            android:icon="@drawable/about"
             android:title="Events" />
 
         <item
             android:id="@+id/nav_recruitments"
-            android:icon="@drawable/recruitments"
+            android:icon="@drawable/about"
             android:title="Recruitments" />
     </group>
 
@@ -31,8 +31,12 @@
                 android:title="About Us" />
             <item
                 android:id="@+id/nav_contact_us"
-                android:icon="@drawable/contact"
+                android:icon="@drawable/about"
                 android:title="Contact Us" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/about"
+                android:title="Log out" />
         </menu>
     </item>
 
