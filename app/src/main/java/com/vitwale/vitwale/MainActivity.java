@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
 
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users");
         mDatabaseUser.keepSynced(true);
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity
         checkUserExist();
 
     }
+
 
     protected void onStart() {
         super.onStart();
@@ -108,6 +114,12 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View v)
+    {
+        Intent i = new Intent(MainActivity.this, ProfilePicture.class);
+        startActivity(i);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

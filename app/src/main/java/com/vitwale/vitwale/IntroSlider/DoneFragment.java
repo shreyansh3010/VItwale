@@ -42,7 +42,7 @@ public class DoneFragment extends Fragment implements WelcomePage.OnChangeListen
             @Override
             public void onClick(View v) {
                 new WelcomeFinisher(DoneFragment.this).finish();
-                Intent intent = new Intent(getActivity(),MainActivity.class); //Change to Login if needed
+                Intent intent = new Intent(getActivity(),SignUpSignIn.class); //Change to Login if needed
                 startActivity(intent);
 
             }
