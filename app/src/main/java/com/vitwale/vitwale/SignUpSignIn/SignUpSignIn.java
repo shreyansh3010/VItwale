@@ -2,6 +2,7 @@ package com.vitwale.vitwale.SignUpSignIn;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.percent.PercentLayoutHelper;
@@ -180,7 +181,6 @@ public class SignUpSignIn extends AppCompatActivity {
                         Intent mainIntent = new Intent(SignUpSignIn.this, MainActivity.class);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(mainIntent);
-
                     }
 
                 }

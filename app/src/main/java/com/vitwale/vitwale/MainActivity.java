@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,16 +13,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.stephentuso.welcome.WelcomeHelper;
-import com.vitwale.vitwale.IntroSlider.MyWelcomeActivity;
+import com.vitwale.vitwale.Home.HomeFragment;
 import com.vitwale.vitwale.SignUpSignIn.SignUpSignIn;
 
 public class MainActivity extends AppCompatActivity
@@ -34,14 +32,27 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabaseUser;
+    private TextView profileName;
+    private FirebaseUser user;
+    private String name;
+    private String uid;
+    private FirebaseDatabase mDatabase;
+    private Toolbar toolbar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 
+        HomeFragment fragment = new HomeFragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
+        getSupportActionBar().setTitle("Home");
 
 
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -51,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() == null){
+                if (firebaseAuth.getCurrentUser() == null) {
                     Intent Loginintent = new Intent(MainActivity.this, SignUpSignIn.class);
                     Loginintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(Loginintent);
@@ -59,9 +70,34 @@ public class MainActivity extends AppCompatActivity
             }
         };
 
+/*
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
+
+            // Check if user's email is verified
+            // boolean emailVerified = user.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            user.getToken(name);
+            //String uid = user.getUid();
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            View v = navigationView.getHeaderView(0);
+            TextView profileName = (TextView) v.findViewById(R.id.profileName);
+            profileName.setText(name);
+
+        }
+
+*/
+
+
+
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -72,6 +108,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         checkUserExist();
 
@@ -129,7 +166,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-
+            HomeFragment fragment = new HomeFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+            getSupportActionBar().setTitle("Home");
         } else if (id == R.id.nav_organizations) {
 
         } else if (id == R.id.nav_events) {
