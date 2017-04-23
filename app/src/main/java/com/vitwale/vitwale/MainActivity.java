@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vitwale.vitwale.Home.HomeFragment;
+import com.vitwale.vitwale.Organisation.OrganisationFragment;
 import com.vitwale.vitwale.SignUpSignIn.SignUpSignIn;
 
 public class MainActivity extends AppCompatActivity
@@ -172,6 +173,11 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
             getSupportActionBar().setTitle("Home");
         } else if (id == R.id.nav_organizations) {
+            OrganisationFragment fragment = new OrganisationFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+            getSupportActionBar().setTitle("Organisations");
 
         } else if (id == R.id.nav_events) {
 
@@ -180,7 +186,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_about_us) {
 
         } else if (id == R.id.nav_contact_us) {
-                logout();                             // for trail purpose
+                //logout();                             // for trail purpose
         } else if (id == R.id.nav_logout) {
             logout();                             // for trail purpose
         }
