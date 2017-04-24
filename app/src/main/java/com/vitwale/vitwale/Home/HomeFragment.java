@@ -32,6 +32,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.vitwale.vitwale.Organisation.Blog;
+import com.vitwale.vitwale.Organisation.OrganisationFragment;
 import com.vitwale.vitwale.R;
 
 import java.util.HashMap;
@@ -62,6 +64,11 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://vitwale-e0508.firebaseio.com");
         mDatabase.keepSynced(true);
+
+        mBlogList = (RecyclerView) view.findViewById(R.id.blog_list);
+        mBlogList.setHasFixedSize(true);
+        mBlogList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mBlogList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
         mDatabase.child("home_slider").addValueEventListener(new ValueEventListener() {
             @Override
@@ -100,15 +107,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             }
         });
 
-
-
-        mBlogList = (RecyclerView) view.findViewById(R.id.blog_list);
-        mBlogList.setHasFixedSize(true);
-        mBlogList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mBlogList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-
-
-
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
@@ -121,15 +119,15 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<Blog1, BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Blog1, BlogViewHolder>(
+        FirebaseRecyclerAdapter<Blog, OrganisationFragment.BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Blog, OrganisationFragment.BlogViewHolder>(
 
-                Blog1.class,
+                Blog.class,
                 R.layout.blog_row,
-                BlogViewHolder.class,
+                OrganisationFragment.BlogViewHolder.class,
                 mDatabase.child("Blog")
         ) {
             @Override
-            protected void populateViewHolder(BlogViewHolder viewHolder, Blog1 model, int position) {
+            protected void populateViewHolder(OrganisationFragment.BlogViewHolder viewHolder, Blog model, int position) {
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setImage(getActivity(),model.getImage());
@@ -137,45 +135,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             }
         };
         mBlogList.setAdapter(firebaseRecyclerAdapter);
-    }
-
-    public static class BlogViewHolder extends RecyclerView.ViewHolder {
-
-
-
-        View mView;
-        public BlogViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
-        }
-
-        public void setTitle(String title){
-
-            TextView post_title = (TextView) mView.findViewById(R.id.post_title);
-            post_title.setText(title);
-        }
-
-        public void setDesc(String desc){
-            TextView post_desc = (TextView) mView.findViewById(R.id.post_text);
-            post_desc.setText(desc);
-        }
-
-        public void setImage(Context ctx, String image){
-            final ProgressBar mprogressBar;
-            mprogressBar = (ProgressBar) mView.findViewById(R.id.progressBar5);
-            ImageView post_image = (ImageView) mView.findViewById(R.id.post_image);
-            Picasso.with(ctx).load(image).into(post_image, new Callback() {
-                @Override
-                public void onSuccess() {
-                    mprogressBar.setVisibility(View.GONE);
-                }
-
-                @Override
-                public void onError() {
-
-                }
-            });
-        }
     }
 
 

@@ -93,8 +93,6 @@ public class SignUpSignIn extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Animation clockwise= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_right_to_left);
-                btnSignup.startAnimation(clockwise);
                 startRegister();
             }
         });

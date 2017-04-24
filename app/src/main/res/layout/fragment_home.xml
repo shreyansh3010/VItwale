@@ -7,15 +7,7 @@
     tools:context="com.vitwale.vitwale.Home.HomeFragment">
 
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/slider"
                     android:layout_width="match_parent"
@@ -55,14 +47,14 @@
                     android:layout_marginBottom="20dp"
                     />
 
-                </LinearLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/blog_list"
+        android:layout_below="@+id/slider"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"></android.support.v7.widget.RecyclerView>
 
-                        <android.support.v7.widget.RecyclerView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/blog_list"></android.support.v7.widget.RecyclerView>
-
-        </LinearLayout>
 
 </RelativeLayout>
