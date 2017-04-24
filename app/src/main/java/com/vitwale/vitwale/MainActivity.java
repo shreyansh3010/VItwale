@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.firebase.client.Firebase;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabaseUser;
+    private FirebaseAnalytics mFirebaseAnalytics;
     private TextView profileName;
     private FirebaseUser user;
     private String name;
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
         getSupportActionBar().setTitle("Home");
 
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users");
         mDatabaseUser.keepSynced(true);
