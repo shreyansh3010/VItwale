@@ -63,25 +63,13 @@ public class OrganisationFragment extends Fragment {
             }
         };
 
-        mBlogList = (RecyclerView) view.findViewById(R.id.blog_list);
+        mBlogList = (RecyclerView) view.findViewById(R.id.blog_list_org);
         mBlogList.setHasFixedSize(true);
         mBlogList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mBlogList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         //mprogress = new ProgressDialog(getActivity());
         //mprogress.setCanceledOnTouchOutside(false);
 
-        checkUserExist();
-        return view;
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        mAuth.addAuthStateListener(mAuthListener);
-
-        //mprogress.setMessage("Please wait...");
-        //mprogress.show();
         FirebaseRecyclerAdapter<Blog, BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(
 
                 Blog.class,
@@ -98,6 +86,21 @@ public class OrganisationFragment extends Fragment {
             }
         };
         mBlogList.setAdapter(firebaseRecyclerAdapter);
+
+
+        checkUserExist();
+        return view;
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        mAuth.addAuthStateListener(mAuthListener);
+
+        //mprogress.setMessage("Please wait...");
+        //mprogress.show();
 
     }
 
