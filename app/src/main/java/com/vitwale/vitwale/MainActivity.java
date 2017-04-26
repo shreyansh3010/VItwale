@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +24,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 import com.vitwale.vitwale.Home.HomeFragment;
 import com.vitwale.vitwale.Organisation.OrganisationFragment;
 import com.vitwale.vitwale.SignUpSignIn.SignUpSignIn;
+
+import static com.vitwale.vitwale.R.id.image;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabaseUser;
     private TextView mprofileName, mProfileEmail;
+    private ImageView mProfileImage;
     private FirebaseUser user;
     private String name;
     private String uid;
@@ -76,12 +81,22 @@ public class MainActivity extends AppCompatActivity
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             String name = dataSnapshot.child(uid).child("name").getValue(String.class);
                             String email = dataSnapshot.child(uid).child("email").getValue(String.class);
+                            String img = dataSnapshot.child(uid).child("image").getValue(String.class);
                             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                             View headerView = navigationView.getHeaderView(0);
                             mprofileName = (TextView) headerView.findViewById(R.id.profileName);
                             mprofileName.setText(name);
                             mProfileEmail = (TextView) headerView.findViewById(R.id.profileEmail);
                             mProfileEmail.setText(email);
+                            mProfileImage = (ImageView) headerView.findViewById(R.id.profileImage);
+                            mProfileImage.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent i = new Intent(MainActivity.this, ProfilePicture.class);
+                                    startActivity(i);
+                                }
+                            });
+                            Picasso.with(getApplication()).load(img).into(mProfileImage);
                         }
 
                         @Override
@@ -147,12 +162,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void onClick(View v)
-    {
-        Intent i = new Intent(MainActivity.this, ProfilePicture.class);
-        startActivity(i);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
