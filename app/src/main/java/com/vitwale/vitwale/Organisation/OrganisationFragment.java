@@ -31,10 +31,7 @@ public class OrganisationFragment extends Fragment {
 
     private RecyclerView mBlogList;
     private DatabaseReference mDatabase;
-    private DatabaseReference mDatabaseUser;
     private ProgressDialog mprogress;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     View view;
 
     @Override
@@ -44,31 +41,15 @@ public class OrganisationFragment extends Fragment {
         view =  inflater.inflate(R.layout.fragment_organisation, container, false);
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Blog");
-        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users");
-
-        mDatabaseUser.keepSynced(true);
         mDatabase.keepSynced(true);
 
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() == null){
-                    Intent lintent = new Intent(getActivity(), SignUpSignIn.class);
-                    startActivity(lintent);
-                    lintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(lintent);
-
-                }
-            }
-        };
 
         mBlogList = (RecyclerView) view.findViewById(R.id.blog_list_org);
         mBlogList.setHasFixedSize(true);
         mBlogList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBlogList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        //mprogress = new ProgressDialog(getActivity());
-        //mprogress.setCanceledOnTouchOutside(false);
+        mprogress = new ProgressDialog(getActivity());
+        mprogress.setCanceledOnTouchOutside(false);
 
         FirebaseRecyclerAdapter<Blog, BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(
 
@@ -82,13 +63,12 @@ public class OrganisationFragment extends Fragment {
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setImage(getActivity(),model.getImage());
-                //mprogress.dismiss();
+                mprogress.dismiss();
             }
         };
         mBlogList.setAdapter(firebaseRecyclerAdapter);
 
 
-        checkUserExist();
         return view;
 
     }
@@ -97,40 +77,6 @@ public class OrganisationFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        mAuth.addAuthStateListener(mAuthListener);
-
-        //mprogress.setMessage("Please wait...");
-        //mprogress.show();
-
-    }
-
-
-    private void checkUserExist() {
-
-        if(mAuth.getCurrentUser() != null) {
-
-            final String user_id = mAuth.getCurrentUser().getUid();
-
-            mDatabaseUser.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    if (!dataSnapshot.hasChild(user_id)) {
-
-                        Intent sintent = new Intent(getActivity(), SignUpSignIn.class);
-                        sintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(sintent);
-
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }
     }
 
 
@@ -156,30 +102,11 @@ public class OrganisationFragment extends Fragment {
         }
 
         public void setImage(Context ctx, String image){
-            final ProgressBar mprogressBar;
-            mprogressBar = (ProgressBar) mView.findViewById(R.id.progressBar5);
             ImageView post_image = (ImageView) mView.findViewById(R.id.post_image);
-            Picasso.with(ctx).load(image).into(post_image, new Callback() {
-                @Override
-                public void onSuccess() {
-                    mprogressBar.setVisibility(View.GONE);
-                }
-
-                @Override
-                public void onError() {
-
-                }
-            });
+            Picasso.with(ctx).load(image).into(post_image);
         }
     }
 
 
-
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }*/
 
 }

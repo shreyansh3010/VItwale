@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         mDemoSlider = (SliderLayout) view.findViewById(R.id.slider);
 
         mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl("https://vitwale-e0508.firebaseio.com");
-        mDatabase.keepSynced(true);
+        mDatabase.child("Blog").keepSynced(true);
 
         mBlogList = (RecyclerView) view.findViewById(R.id.blog_list);
         mBlogList.setHasFixedSize(true);
@@ -112,13 +112,16 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(3000);
         mDemoSlider.addOnPageChangeListener(this);
-
+        mprogress = new ProgressDialog(getActivity());
+        mprogress.setCanceledOnTouchOutside(false);
 
         return view;
     }
     @Override
     public void onStart() {
         super.onStart();
+        mprogress.setMessage("Please wait...");
+        mprogress.show();
         FirebaseRecyclerAdapter<Blog, OrganisationFragment.BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Blog, OrganisationFragment.BlogViewHolder>(
 
                 Blog.class,
@@ -131,7 +134,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setImage(getActivity(),model.getImage());
-                //mprogress.dismiss();
+                mprogress.dismiss();
             }
         };
         mBlogList.setAdapter(firebaseRecyclerAdapter);
@@ -150,34 +153,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     public void onSliderClick(BaseSliderView slider) {
         Toast.makeText(getActivity(),slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
-
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main,menu);
-        return super.onCreateOptionsMenu(menu);
-    }*/
-
-  /*  @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_custom_indicator:
-                mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
-                break;
-            case R.id.action_custom_child_animation:
-                mDemoSlider.setCustomAnimation(new ChildAnimationExample());
-                break;
-            case R.id.action_restore_default:
-                mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-                mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-                break;
-            case R.id.action_github:
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/daimajia/AndroidImageSlider"));
-                startActivity(browserIntent);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}

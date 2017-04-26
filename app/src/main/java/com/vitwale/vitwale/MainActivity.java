@@ -71,34 +71,6 @@ public class MainActivity extends AppCompatActivity
             }
         };
 
-/*
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-
-            // Check if user's email is verified
-            // boolean emailVerified = user.isEmailVerified();
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            user.getToken(name);
-            //String uid = user.getUid();
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            View v = navigationView.getHeaderView(0);
-            TextView profileName = (TextView) v.findViewById(R.id.profileName);
-            profileName.setText(name);
-
-        }
-
-*/
-
-
-
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
