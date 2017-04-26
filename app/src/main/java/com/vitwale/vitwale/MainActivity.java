@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabaseUser;
-    private TextView profileName;
+    private TextView mprofileName, mProfileEmail;
     private FirebaseUser user;
     private String name;
     private String uid;
@@ -68,8 +69,30 @@ public class MainActivity extends AppCompatActivity
                     Loginintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(Loginintent);
                 }
+                else {
+                    final String uid = mAuth.getCurrentUser().getUid();
+                    mDatabaseUser.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            String name = dataSnapshot.child(uid).child("name").getValue(String.class);
+                            String email = dataSnapshot.child(uid).child("email").getValue(String.class);
+                            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                            View headerView = navigationView.getHeaderView(0);
+                            mprofileName = (TextView) headerView.findViewById(R.id.profileName);
+                            mprofileName.setText(name);
+                            mProfileEmail = (TextView) headerView.findViewById(R.id.profileEmail);
+                            mProfileEmail.setText(email);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
             }
         };
+
 
 
 
@@ -188,6 +211,7 @@ public class MainActivity extends AppCompatActivity
                         startActivity(setupintent);
 
                     }
+
 
                 }
 

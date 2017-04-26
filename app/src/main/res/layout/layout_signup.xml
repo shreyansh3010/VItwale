@@ -5,7 +5,7 @@
     android:background="@color/colorAccentTrans"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="48dp">
+    android:padding="30dp">
 
 
     <ImageView
@@ -13,7 +13,24 @@
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:paddingBottom="20dp"
-        android:src="@drawable/login" />
+        android:src="@drawable/login"
+        android:id="@+id/imageView2" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#FFF">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Name"
+            android:id="@+id/name_signup_field"
+            android:textColor="#FFFFFF"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp" />
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
