@@ -13,10 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.firebase.client.Firebase;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,9 +24,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 import com.vitwale.vitwale.Home.HomeFragment;
 import com.vitwale.vitwale.Organisation.OrganisationFragment;
 import com.vitwale.vitwale.SignUpSignIn.SignUpSignIn;
+
+import static com.vitwale.vitwale.R.id.image;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,8 +38,8 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabaseUser;
-    private FirebaseAnalytics mFirebaseAnalytics;
-    private TextView profileName;
+    private TextView mprofileName, mProfileEmail;
+    private ImageView mProfileImage;
     private FirebaseUser user;
     private String name;
     private String uid;
@@ -58,7 +61,6 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
         getSupportActionBar().setTitle("Home");
 
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users");
         mDatabaseUser.keepSynced(true);
@@ -72,35 +74,39 @@ public class MainActivity extends AppCompatActivity
                     Loginintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(Loginintent);
                 }
+                else {
+                    final String uid = mAuth.getCurrentUser().getUid();
+                    mDatabaseUser.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            String name = dataSnapshot.child(uid).child("name").getValue(String.class);
+                            String email = dataSnapshot.child(uid).child("email").getValue(String.class);
+                            String img = dataSnapshot.child(uid).child("image").getValue(String.class);
+                            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                            View headerView = navigationView.getHeaderView(0);
+                            mprofileName = (TextView) headerView.findViewById(R.id.profileName);
+                            mprofileName.setText(name);
+                            mProfileEmail = (TextView) headerView.findViewById(R.id.profileEmail);
+                            mProfileEmail.setText(email);
+                            mProfileImage = (ImageView) headerView.findViewById(R.id.profileImage);
+                            mProfileImage.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent i = new Intent(MainActivity.this, ProfilePicture.class);
+                                    startActivity(i);
+                                }
+                            });
+                            Picasso.with(getApplication()).load(img).into(mProfileImage);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
             }
         };
-
-/*
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-
-            // Check if user's email is verified
-            // boolean emailVerified = user.isEmailVerified();
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            user.getToken(name);
-            //String uid = user.getUid();
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            View v = navigationView.getHeaderView(0);
-            TextView profileName = (TextView) v.findViewById(R.id.profileName);
-            profileName.setText(name);
-
-        }
-
-*/
-
-
 
 
 
@@ -156,12 +162,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void onClick(View v)
-    {
-        Intent i = new Intent(MainActivity.this, ProfilePicture.class);
-        startActivity(i);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -220,6 +220,7 @@ public class MainActivity extends AppCompatActivity
                         startActivity(setupintent);
 
                     }
+
 
                 }
 

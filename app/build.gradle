@@ -40,7 +40,8 @@ dependencies {
     //compile 'com.firebaseui:firebase-ui-database:0.4.0'
     //compile 'com.squareup.picasso:picasso:2.5.2'
     //compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    //compile 'com.theartofdev.edmodo:android-image-cropper:2.3.+'
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.3.+'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     //For SignUpSignIn
     //For Intro Slider
     compile 'com.android.support:appcompat-v7:25.3.1'
