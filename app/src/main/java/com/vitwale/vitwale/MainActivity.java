@@ -80,14 +80,11 @@ public class MainActivity extends AppCompatActivity
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             String name = dataSnapshot.child(uid).child("name").getValue(String.class);
-                            String email = dataSnapshot.child(uid).child("email").getValue(String.class);
                             String img = dataSnapshot.child(uid).child("image").getValue(String.class);
                             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                             View headerView = navigationView.getHeaderView(0);
                             mprofileName = (TextView) headerView.findViewById(R.id.profileName);
                             mprofileName.setText(name);
-                            mProfileEmail = (TextView) headerView.findViewById(R.id.profileEmail);
-                            mProfileEmail.setText(email);
                             mProfileImage = (ImageView) headerView.findViewById(R.id.profileImage);
                             mProfileImage.setOnClickListener(new View.OnClickListener() {
                                 @Override

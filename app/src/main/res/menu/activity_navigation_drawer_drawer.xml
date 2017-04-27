@@ -4,22 +4,22 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/about"
+            android:icon="@mipmap/ic_home_black_48dp"
             android:title="Home" />
 
         <item
             android:id="@+id/nav_organizations"
-            android:icon="@drawable/about"
+            android:icon="@mipmap/ic_account_balance_black_48dp"
             android:title="Organizations" />
 
         <item
             android:id="@+id/nav_events"
-            android:icon="@drawable/about"
+            android:icon="@mipmap/ic_event_black_48dp"
             android:title="Events" />
 
         <item
             android:id="@+id/nav_recruitments"
-            android:icon="@drawable/about"
+            android:icon="@mipmap/ic_group_add_black_48dp"
             android:title="Recruitments" />
     </group>
 
@@ -27,15 +27,15 @@
         <menu>
             <item
                 android:id="@+id/nav_about_us"
-                android:icon="@drawable/about"
+                android:icon="@mipmap/ic_info_black_48dp"
                 android:title="About Us" />
             <item
                 android:id="@+id/nav_contact_us"
-                android:icon="@drawable/about"
+                android:icon="@mipmap/ic_call_black_48dp"
                 android:title="Contact Us" />
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/about"
+                android:icon="@mipmap/ic_power_settings_new_black_48dp"
                 android:title="Log out" />
         </menu>
     </item>

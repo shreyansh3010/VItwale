@@ -16,8 +16,10 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_navigation_drawer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".SplashScreen.Splash">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".SplashScreen.Splash"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,16 +28,20 @@
         </activity>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" />
+            android:theme="@style/Base.Theme.AppCompat"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".IntroSlider.MyWelcomeActivity"
-            android:theme="@style/WelcomeScreenTheme.Light" />
+            android:theme="@style/WelcomeScreenTheme.Light"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SignUpSignIn.SignUpSignIn"
-            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
+            android:theme="@style/AppTheme.NoActionBar.FullScreen"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ProfilePicture"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"></activity>
         
     </application>
 

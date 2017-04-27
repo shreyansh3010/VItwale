@@ -161,6 +161,7 @@ public class SignUpSignIn extends AppCompatActivity {
         final String email = memailSignup.getText().toString().trim();
         final String password = mPasswordSignup.getText().toString().trim();
         final String name = mNameSignUp.getText().toString().trim();
+        final String image = "https://firebasestorage.googleapis.com/v0/b/vitwale-e0508.appspot.com/o/Profile_images%2Fcropped-626345379.jpg?alt=media&token=4cf1719a-2af8-4fd6-8bd6-0054ae1d9142";
         if(!TextUtils.isEmpty(mobile) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
 
             mProgressDialog.setMessage("Sigining up...");
@@ -175,6 +176,7 @@ public class SignUpSignIn extends AppCompatActivity {
                         current_user_db.child("name").setValue(name);
                         current_user_db.child("mobile").setValue(mobile);
                         current_user_db.child("email").setValue(email);
+                        current_user_db.child("image").setValue(image);
                         current_user_db.child("password").setValue(password);
                         mProgressDialog.dismiss();
 
