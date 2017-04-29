@@ -13,9 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,8 +29,6 @@ import com.vitwale.vitwale.Home.HomeFragment;
 import com.vitwale.vitwale.Organisation.OrganisationFragment;
 import com.vitwale.vitwale.SignUpSignIn.SignUpSignIn;
 
-import static com.vitwale.vitwale.R.id.image;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,8 +36,9 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabaseUser;
-    private TextView mprofileName, mProfileEmail;
+    private TextView mprofileName, mProfileReg;
     private ImageView mProfileImage;
+    private ImageView mSettings;
     private FirebaseUser user;
     private String name;
     private String uid;
@@ -81,19 +80,23 @@ public class MainActivity extends AppCompatActivity
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             String name = dataSnapshot.child(uid).child("name").getValue(String.class);
                             String img = dataSnapshot.child(uid).child("image").getValue(String.class);
+                            String Reg = dataSnapshot.child(uid).child("Reg").getValue(String.class);
                             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                             View headerView = navigationView.getHeaderView(0);
                             mprofileName = (TextView) headerView.findViewById(R.id.profileName);
                             mprofileName.setText(name);
-                            mProfileImage = (ImageView) headerView.findViewById(R.id.profileImage);
-                            mProfileImage.setOnClickListener(new View.OnClickListener() {
+                            mProfileReg = (TextView) headerView.findViewById(R.id.profileReg);
+                            mProfileReg.setText(Reg);
+                            mProfileImage = (ImageView) headerView.findViewById(R.id.user_Img);
+                            Picasso.with(getApplication()).load(img).into(mProfileImage);
+                            mSettings = (ImageButton) headerView.findViewById(R.id.settingBtn);
+                            mSettings.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Intent i = new Intent(MainActivity.this, ProfilePicture.class);
+                                    Intent i = new Intent(MainActivity.this, Profile.class);
                                     startActivity(i);
                                 }
                             });
-                            Picasso.with(getApplication()).load(img).into(mProfileImage);
                         }
 
                         @Override

@@ -12,13 +12,14 @@
         android:text="VITWALE"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingTop="20dp"
         android:id="@+id/textView2"
-        android:textAlignment="center"
         android:gravity="center"
+        android:textAlignment="gravity"
         android:textStyle="bold"
         android:textSize="20sp"
         android:background="@color/colorPrimaryDark"
-        android:layout_weight="1"/>
+        android:layout_weight="2"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -31,7 +32,7 @@
         android:layout_weight="3">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileImage"
+            android:id="@+id/user_Img"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:src="@mipmap/default_img"
@@ -40,25 +41,42 @@
             app:srcCompat="@android:drawable/sym_def_app_icon"
             android:layout_weight="2" />
 
-        <TextView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Android Studio"
-            android:id="@+id/profileName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:layout_weight="4"
-            android:textAllCaps="true"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark" />
+            android:layout_weight="6"
+            android:paddingLeft="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="**************"
+                android:id="@+id/profileName"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textAllCaps="true"
+                android:gravity="center_vertical"
+                android:textSize="12sp"
+                android:textAlignment="gravity"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:text="**********"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/profileReg"
+                android:textColor="#FF8F8F8F"
+                android:textSize="12sp" />
+        </LinearLayout>
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             app:srcCompat="@mipmap/ic_settings_black_24dp"
             android:background="#ccc"
-            android:id="@+id/imageButton2"
+            android:id="@+id/settingBtn"
             android:layout_weight="1" />
 
     </LinearLayout>

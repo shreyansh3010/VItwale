@@ -40,7 +40,7 @@ public class SignUpSignIn extends AppCompatActivity {
     private Button btnSignup;
     private Button btnSignin;
     private WelcomeHelper welcomeScreen;
-    private TextView memailSignup, mPasswordSignup, mMobileSignup, mNameSignUp;
+    private TextView memailSignup, mPasswordSignup, mRegSignup, mNameSignUp;
     private TextView memailSignin, mPasswordSignin;
     private FirebaseAuth mAuth;
     private ProgressDialog mProgressDialog;
@@ -62,7 +62,7 @@ public class SignUpSignIn extends AppCompatActivity {
         mNameSignUp = (TextView) findViewById(R.id.name_signup_field);
         memailSignup = (TextView) findViewById(R.id.email_signup_field);
         mPasswordSignup = (TextView) findViewById(R.id.password_signup_field);
-        mMobileSignup = (TextView) findViewById(R.id.mobile_signup_filed);
+        mRegSignup = (TextView) findViewById(R.id.Reg_signup_filed);
         btnSignup= (Button) findViewById(R.id.SignupBtn);
 
         mProgressDialog = new ProgressDialog(this);
@@ -157,7 +157,7 @@ public class SignUpSignIn extends AppCompatActivity {
 
     private void startRegister() {
 
-        final String mobile = mMobileSignup.getText().toString().trim();
+        final String mobile = mRegSignup.getText().toString().trim();
         final String email = memailSignup.getText().toString().trim();
         final String password = mPasswordSignup.getText().toString().trim();
         final String name = mNameSignUp.getText().toString().trim();
@@ -174,7 +174,7 @@ public class SignUpSignIn extends AppCompatActivity {
                         String user_id = mAuth.getCurrentUser().getUid();
                         DatabaseReference current_user_db = mDatabase.child(user_id);
                         current_user_db.child("name").setValue(name);
-                        current_user_db.child("mobile").setValue(mobile);
+                        current_user_db.child("Reg").setValue(mobile);
                         current_user_db.child("email").setValue(email);
                         current_user_db.child("image").setValue(image);
                         current_user_db.child("password").setValue(password);

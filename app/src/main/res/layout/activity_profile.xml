@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_setup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.vitwale.vitwale.Profile"
+    android:paddingBottom="20dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="50dp">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/colorPrimaryDark"
+            app:srcCompat="@android:drawable/sym_def_app_icon"
+            android:layout_weight="2" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="none"
+            android:ems="10"
+            android:id="@+id/user_name"
+            android:layout_marginTop="54dp"
+            android:background="@drawable/input_outline2"
+            android:padding="10dp"
+            android:layout_below="@+id/user_Img"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="none"
+            android:ems="10"
+            android:id="@+id/user_reg"
+            android:layout_below="@+id/user_name"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/input_outline2"
+            android:padding="10dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/user_email"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/input_outline2"
+            android:layout_below="@+id/user_reg"
+            android:layout_alignParentStart="true"
+            android:padding="10dp"
+            android:text="none" />
+    </LinearLayout>
+
+    <Button
+            android:text="UPDATE PROFILE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/UpdateBtn"
+            android:textColor="#ffffff"
+        android:background="@drawable/btn_ountline" />
+
+
+</RelativeLayout>
