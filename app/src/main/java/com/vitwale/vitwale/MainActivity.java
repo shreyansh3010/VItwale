@@ -25,8 +25,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.vitwale.vitwale.AboutUs.AboutUs;
+import com.vitwale.vitwale.ClubsGeneral.ClubsGeneral;
+import com.vitwale.vitwale.ContactUs.ContactUs;
+import com.vitwale.vitwale.Events.Events;
 import com.vitwale.vitwale.Home.HomeFragment;
 import com.vitwale.vitwale.Organisation.OrganisationFragment;
+import com.vitwale.vitwale.Recruitments.Recruitments;
 import com.vitwale.vitwale.SignUpSignIn.SignUpSignIn;
 
 public class MainActivity extends AppCompatActivity
@@ -184,12 +189,31 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setTitle("Organisations");
 
         } else if (id == R.id.nav_events) {
+            Intent intent=new Intent(MainActivity.this, ClubsGeneral.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_recruitments) {
+            Recruitments fragment = new Recruitments();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+            getSupportActionBar().setTitle("Recruitments");
+
+
 
         } else if (id == R.id.nav_about_us) {
+            AboutUs fragment = new AboutUs();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+            getSupportActionBar().setTitle("About Us");
 
         } else if (id == R.id.nav_contact_us) {
+            ContactUs fragment = new ContactUs();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+            getSupportActionBar().setTitle("Contact Us");
                 //logout();                             // for trail purpose
         } else if (id == R.id.nav_logout) {
             logout();                             // for trail purpose

@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment_tab_club
         view =  inflater.inflate(R.layout.fragment_home, container, false);
         mDemoSlider = (SliderLayout) view.findViewById(R.id.slider);
 
@@ -144,7 +144,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     @Override
     public void onStop() {
-        // To prevent a memory leak on rotation, make sure to call stopAutoCycle() on the slider before activity or fragment is destroyed
+        // To prevent a memory leak on rotation, make sure to call stopAutoCycle() on the slider before activity or fragment_tab_club is destroyed
         mDemoSlider.stopAutoCycle();
         super.onStop();
     }

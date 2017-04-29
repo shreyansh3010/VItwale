@@ -13,6 +13,7 @@
     <color name="colorPrimary">#55b3ff</color>
 
     <color name="colorPrimaryDark">#2196F3</color>
+    <color name="text_color">#212121</color>
 
 
 </resources>

@@ -40,10 +40,12 @@ dependencies {
     //compile 'com.firebaseui:firebase-ui-database:0.4.0'
     //compile 'com.squareup.picasso:picasso:2.5.2'
     //compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.theartofdev.edmodo:android-image-cropper:2.3.+'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
     //For SignUpSignIn
     //For Intro Slider
+
+
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.3.+'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:percent:25.3.1'
     compile 'com.android.support:design:25.3.1'
@@ -62,6 +64,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.android.support:support-v4:25.3.1'
+    compile 'me.henrytao:smooth-app-bar-layout:24.1.0.0'
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -28,7 +28,7 @@ public class DoneFragment extends Fragment implements WelcomePage.OnChangeListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment_tab_club
         return inflater.inflate(R.layout.fragment_done, container, false);
     }
 

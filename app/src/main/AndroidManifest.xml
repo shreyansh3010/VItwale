@@ -40,6 +40,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity android:name=".Profile"></activity>
+        <activity
+            android:name=".ClubsGeneral.ClubsGeneral"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
