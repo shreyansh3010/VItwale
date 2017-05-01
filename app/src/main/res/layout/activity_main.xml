@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:id="@+id/pn"/>
 
+
     <include
         layout="@layout/app_bar_navigation_drawer"
         android:layout_width="match_parent"
