@@ -2,8 +2,11 @@ package com.vitwale.vitwale;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.service.chooser.ChooserTarget;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,11 +27,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 import com.vitwale.vitwale.AboutUs.AboutUs;
+import com.vitwale.vitwale.ChatBox.ChatActivity;
 import com.vitwale.vitwale.ClubsGeneral.ClubsGeneral;
 import com.vitwale.vitwale.ContactUs.ContactUs;
-import com.vitwale.vitwale.Events.Events;
 import com.vitwale.vitwale.Home.HomeFragment;
 import com.vitwale.vitwale.Organisation.OrganisationFragment;
 import com.vitwale.vitwale.Recruitments.Recruitments;
@@ -49,11 +53,13 @@ public class MainActivity extends AppCompatActivity
     private String uid;
     private FirebaseDatabase mDatabase;
     private Toolbar toolbar = null;
+    private static final String REG_TOKEN = "REG_TOKEN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -172,6 +178,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -209,12 +216,20 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setTitle("About Us");
 
         } else if (id == R.id.nav_contact_us) {
-            ContactUs fragment = new ContactUs();
-            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();
-            getSupportActionBar().setTitle("Contact Us");
-                //logout();                             // for trail purpose
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            getIntent().setData(Uri.parse(("mailto: ")));
+            String[] to = {"vitwale@gmail.com"};
+            intent.putExtra(Intent.EXTRA_EMAIL, to);
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Hi! This is sent from my app.");
+            intent.putExtra(Intent.EXTRA_TEXT, "Hey Whats Up, How you doing? This is my first email message");
+            intent.setType("message/rfc822");
+            startActivity(Intent.createChooser(intent, "Send Email"));
+
+        } else if (id == R.id.nav_chat_box) {
+            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+            startActivity(intent);
+            //getSupportActionBar().setTitle("Chat Box");
+
         } else if (id == R.id.nav_logout) {
             logout();                             // for trail purpose
         }

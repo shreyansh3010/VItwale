@@ -32,6 +32,7 @@ public class ClubsGeneral extends AppCompatActivity {
       //  setupDrawer();
 
     }
+
 /*
     private void setupDrawer() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
