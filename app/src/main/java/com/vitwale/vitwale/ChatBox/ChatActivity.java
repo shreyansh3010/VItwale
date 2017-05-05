@@ -117,7 +117,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
 
-                //Get references to the views of list_item.xml
+                //Get references to the views of list_item_chat.xml
                 TextView messageText, messageUser, messageTime;
                 messageText = (EmojiconTextView) v.findViewById(R.id.message_text);
                 messageUser = (TextView) v.findViewById(R.id.message_user);
